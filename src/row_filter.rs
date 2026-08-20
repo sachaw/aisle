@@ -438,10 +438,10 @@ mod expr_row_filter_impl {
 
                 // CAST
                 DfExpr::Cast(cast) => {
-                    self.evaluate_cast_expr(&cast.expr, &cast.data_type, false, batch)
+                    self.evaluate_cast_expr(&cast.expr, &cast.field.data_type(), false, batch)
                 }
                 DfExpr::TryCast(cast) => {
-                    self.evaluate_cast_expr(&cast.expr, &cast.data_type, true, batch)
+                    self.evaluate_cast_expr(&cast.expr, &cast.field.data_type(), true, batch)
                 }
 
                 _ => Err(ArrowError::NotYetImplemented(format!(
@@ -535,11 +535,11 @@ mod expr_row_filter_impl {
                 DfExpr::Literal(val, _) => Ok(val.to_array_of_size(batch.num_rows())?),
                 DfExpr::Cast(cast) => {
                     let array = self.evaluate_value(&cast.expr, batch)?;
-                    self.cast_array(&array, &cast.data_type, false)
+                    self.cast_array(&array, &cast.field.data_type(), false)
                 }
                 DfExpr::TryCast(cast) => {
                     let array = self.evaluate_value(&cast.expr, batch)?;
-                    self.cast_array(&array, &cast.data_type, true)
+                    self.cast_array(&array, &cast.field.data_type(), true)
                 }
                 DfExpr::Alias(alias) => self.evaluate_value(&alias.expr, batch),
                 _ => Err(ArrowError::NotYetImplemented(format!(

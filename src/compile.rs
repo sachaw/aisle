@@ -26,14 +26,14 @@ fn expr_type_name(expr: &DfExpr) -> String {
         DfExpr::ScalarFunction(func) => format!("function '{:?}'", func.func),
         DfExpr::AggregateFunction(func) => format!("aggregate function '{:?}'", func.func),
         DfExpr::Case(_) => "CASE expression".to_string(),
-        DfExpr::Cast(cast) => format!("CAST to {}", cast.data_type),
+        DfExpr::Cast(cast) => format!("CAST to {}", cast.field.data_type()),
         DfExpr::Between(_) => "BETWEEN expression".to_string(),
         DfExpr::InList(_) => "IN expression".to_string(),
         DfExpr::IsNull(_) => "IS NULL expression".to_string(),
         DfExpr::IsNotNull(_) => "IS NOT NULL expression".to_string(),
         DfExpr::Not(_) => "NOT expression".to_string(),
         DfExpr::Negative(_) => "negation".to_string(),
-        DfExpr::TryCast(cast) => format!("TRY_CAST to {}", cast.data_type),
+        DfExpr::TryCast(cast) => format!("TRY_CAST to {}", cast.field.data_type()),
         DfExpr::Alias(_) => "aliased expression".to_string(),
         _ => "complex expression".to_string(),
     }
@@ -750,11 +750,11 @@ fn extract_column_with_cast(expr: &DfExpr) -> Result<(Column, Option<DataType>),
         DfExpr::Alias(alias) => extract_column_with_cast(&alias.expr),
         DfExpr::Cast(cast) => {
             let (column, _) = extract_column_with_cast(&cast.expr)?;
-            Ok((column, Some(cast.data_type.clone())))
+            Ok((column, Some(cast.field.data_type().clone())))
         }
         DfExpr::TryCast(cast) => {
             let (column, _) = extract_column_with_cast(&cast.expr)?;
-            Ok((column, Some(cast.data_type.clone())))
+            Ok((column, Some(cast.field.data_type().clone())))
         }
         _ => Err(AisleError::NotAColumn {
             found: expr_type_name(expr),
@@ -769,20 +769,20 @@ fn extract_literal(expr: &DfExpr) -> Result<ScalarValue, AisleError> {
         DfExpr::Cast(cast) => {
             let literal = extract_literal(&cast.expr)?;
             literal
-                .cast_to(&cast.data_type)
+                .cast_to(&cast.field.data_type())
                 .map_err(|e| AisleError::TypeCastError {
                     literal_type: literal.data_type().clone(),
-                    target_type: cast.data_type.clone(),
+                    target_type: cast.field.data_type().clone(),
                     reason: e.to_string(),
                 })
         }
         DfExpr::TryCast(cast) => {
             let literal = extract_literal(&cast.expr)?;
             literal
-                .cast_to(&cast.data_type)
+                .cast_to(&cast.field.data_type())
                 .map_err(|e| AisleError::TypeCastError {
                     literal_type: literal.data_type().clone(),
-                    target_type: cast.data_type.clone(),
+                    target_type: cast.field.data_type().clone(),
                     reason: e.to_string(),
                 })
         }
