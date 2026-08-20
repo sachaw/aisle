@@ -147,7 +147,7 @@ fn test_not_page_selection_rejects_unknown_pages() {
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
         .set_data_page_row_count_limit(2)
-        .set_data_page_size_limit(2)
+        .set_data_page_size_limit(8)
         .set_dictionary_enabled(false)
         .build();
 
