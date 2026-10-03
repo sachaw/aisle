@@ -57,7 +57,7 @@ fn make_wide_data() -> (Bytes, Arc<Schema>) {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(5)
+        .set_max_row_group_row_count(Some(5))
         .build();
 
     (write_parquet(&[batch], props), schema)

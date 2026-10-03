@@ -468,7 +468,7 @@ fn page_level_is_null_with_mixed_pages() {
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
         .set_data_page_row_count_limit(2)
-        .set_max_row_group_size(100)
+        .set_max_row_group_row_count(Some(100))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -499,7 +499,7 @@ fn page_level_comparison_with_zero_null_count() {
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
         .set_data_page_row_count_limit(2)
-        .set_max_row_group_size(100)
+        .set_max_row_group_row_count(Some(100))
         .build();
 
     let bytes = write_parquet(&[batch], props);

@@ -119,7 +119,7 @@ mod helpers {
         let mut buffer = Vec::new();
         let props = WriterProperties::builder()
             .set_statistics_enabled(EnabledStatistics::Chunk)
-            .set_max_row_group_size(4) // Force separate row groups
+            .set_max_row_group_row_count(Some(4)) // Force separate row groups
             .build();
 
         let mut writer = ArrowWriter::try_new(&mut buffer, schema.clone(), Some(props))?;

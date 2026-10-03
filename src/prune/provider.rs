@@ -126,6 +126,7 @@ impl<P: AsyncBloomFilterProvider> AsyncBloomFilterProvider for CachedDictionaryH
         self.inner.bloom_filters_batch(requests)
     }
 
+    #[allow(clippy::manual_async_fn)]
     fn dictionary_hints(
         &mut self,
         row_group_idx: usize,
@@ -145,6 +146,7 @@ impl<P: AsyncBloomFilterProvider> AsyncBloomFilterProvider for CachedDictionaryH
         }
     }
 
+    #[allow(clippy::manual_async_fn)]
     fn dictionary_hints_batch<'a>(
         &'a mut self,
         requests: &'a [(usize, usize)],
@@ -401,6 +403,7 @@ pub trait AsyncBloomFilterProvider {
 impl<T: AsyncFileReader + Send + 'static> AsyncBloomFilterProvider
     for ParquetRecordBatchStreamBuilder<T>
 {
+    #[allow(clippy::manual_async_fn)]
     fn bloom_filter(
         &mut self,
         row_group_idx: usize,

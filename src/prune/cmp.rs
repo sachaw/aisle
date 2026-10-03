@@ -344,8 +344,8 @@ fn page_predicate_states(
             Some(
                 mins.zip(maxs)
                     .map(|((idx, min), max)| {
-                        let min = min.and_then(&to_scalar);
-                        let max = max.and_then(&to_scalar);
+                        let min = min.and_then(to_scalar);
+                        let max = max.and_then(to_scalar);
                         let null_count = page_null_count(idx);
                         eval_cmp_stats_page(
                             op,
@@ -386,8 +386,8 @@ fn page_predicate_states(
             Some(
                 mins.zip(maxs)
                     .map(|((idx, min), max)| {
-                        let min = min.and_then(&to_scalar);
-                        let max = max.and_then(&to_scalar);
+                        let min = min.and_then(to_scalar);
+                        let max = max.and_then(to_scalar);
                         let null_count = page_null_count(idx);
                         eval_cmp_stats_page(
                             op,

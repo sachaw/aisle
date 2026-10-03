@@ -107,7 +107,7 @@ mod helpers {
         let props = WriterProperties::builder()
             .set_statistics_enabled(EnabledStatistics::Chunk)
             .set_bloom_filter_enabled(true)
-            .set_max_row_group_size(3)
+            .set_max_row_group_row_count(Some(3))
             .build();
 
         let mut writer = AsyncArrowWriter::try_new(&mut buffer, schema.clone(), Some(props))?;

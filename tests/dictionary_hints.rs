@@ -59,7 +59,7 @@ fn make_two_group_string_metadata_with_values(
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::None)
         .set_dictionary_enabled(true)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet_bytes(&[batch1, batch2], props);
@@ -276,7 +276,7 @@ async fn dictionary_hints_not_called_for_unsupported_literal_types() {
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::None)
         .set_dictionary_enabled(true)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet_bytes(&[batch1, batch2], props);

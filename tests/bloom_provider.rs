@@ -327,7 +327,7 @@ async fn test_provider_called_for_multiple_row_groups() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .set_bloom_filter_enabled(true)
         .build();
 

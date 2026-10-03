@@ -135,7 +135,7 @@ fn row_group_prunes_date_types() {
 
         let props = WriterProperties::builder()
             .set_statistics_enabled(EnabledStatistics::Chunk)
-            .set_max_row_group_size(3)
+            .set_max_row_group_row_count(Some(3))
             .build();
 
         let bytes = write_parquet(&[batch1, batch2], props);
@@ -173,7 +173,7 @@ fn row_group_prunes_timestamp_units() {
 
         let props = WriterProperties::builder()
             .set_statistics_enabled(EnabledStatistics::Chunk)
-            .set_max_row_group_size(3)
+            .set_max_row_group_row_count(Some(3))
             .build();
 
         let bytes = write_parquet(&[batch1, batch2], props);
@@ -200,7 +200,7 @@ fn row_group_prunes_timestamp_with_timezone() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(3)
+        .set_max_row_group_row_count(Some(3))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -331,7 +331,7 @@ fn row_group_prunes_timestamp_between() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(3)
+        .set_max_row_group_row_count(Some(3))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2, batch3], props);
@@ -388,7 +388,7 @@ fn row_group_prunes_mixed_timestamp_and_string_predicate() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(3)
+        .set_max_row_group_row_count(Some(3))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2, batch3], props);
