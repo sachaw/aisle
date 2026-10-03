@@ -34,7 +34,7 @@ async fn prunes_row_groups_with_bloom_filter_eq() {
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
         .set_bloom_filter_enabled(true)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);

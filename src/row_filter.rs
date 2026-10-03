@@ -172,7 +172,7 @@ impl RowFilter {
             (gt(&array_ref, &low_ref)?, lt(&array_ref, &high_ref)?)
         };
 
-        Ok(arith_boolean::and(&low_cmp, &high_cmp)?)
+        arith_boolean::and(&low_cmp, &high_cmp)
     }
 
     fn evaluate_in_list(

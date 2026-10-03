@@ -51,7 +51,11 @@ fn inject_metadata_hints_inner(expr: Expr, allow_hints: bool, config: MetadataHi
 
 fn with_metadata_hints_if_applicable(rule: Expr, config: MetadataHintConfig) -> Expr {
     match rule {
-        Expr::Cmp { column, op, value } if matches!(op, super::CmpOp::Eq) => {
+        Expr::Cmp {
+            column,
+            op: super::CmpOp::Eq,
+            value,
+        } => {
             let mut parts = vec![Expr::Cmp {
                 column: column.clone(),
                 op: super::CmpOp::Eq,

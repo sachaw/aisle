@@ -82,7 +82,7 @@ fn prunes_row_groups_with_list_column() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
-        .set_max_row_group_size(1)
+        .set_max_row_group_row_count(Some(1))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -143,7 +143,7 @@ fn prunes_row_groups_with_list_column_coerced_names() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
-        .set_max_row_group_size(1)
+        .set_max_row_group_row_count(Some(1))
         .set_coerce_types(true)
         .build();
 
@@ -261,7 +261,7 @@ fn prunes_row_groups_with_map_column() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
-        .set_max_row_group_size(1)
+        .set_max_row_group_row_count(Some(1))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -380,7 +380,7 @@ fn prunes_row_groups_with_map_column_coerced_names() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
-        .set_max_row_group_size(1)
+        .set_max_row_group_row_count(Some(1))
         .set_coerce_types(true)
         .build();
 
@@ -493,7 +493,7 @@ fn prunes_row_groups_with_list_of_structs() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
-        .set_max_row_group_size(1)
+        .set_max_row_group_row_count(Some(1))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);

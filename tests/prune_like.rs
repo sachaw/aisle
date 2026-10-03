@@ -44,7 +44,7 @@ fn prunes_row_groups_with_like_prefix() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);

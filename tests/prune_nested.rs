@@ -52,7 +52,7 @@ fn prunes_row_groups_with_nested_column() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Page)
-        .set_max_row_group_size(5)
+        .set_max_row_group_row_count(Some(5))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -78,7 +78,7 @@ fn prunes_pages_with_nested_column_index() {
         .set_data_page_row_count_limit(1)
         .set_data_page_size_limit(1)
         .set_dictionary_enabled(false)
-        .set_max_row_group_size(100)
+        .set_max_row_group_row_count(Some(100))
         .build();
 
     let bytes = write_parquet(&[batch], props);

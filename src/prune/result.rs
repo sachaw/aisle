@@ -116,6 +116,7 @@ impl PruneResult {
     }
 
     /// Consume the result and return all components, including projection metadata.
+    #[allow(clippy::type_complexity)]
     pub fn into_parts_with_projection(
         self,
     ) -> (

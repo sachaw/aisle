@@ -64,7 +64,7 @@ fn allows_noop_column_cast() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -87,7 +87,7 @@ fn allows_noop_try_cast() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -130,7 +130,7 @@ fn casts_literals_at_compile_time() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -153,7 +153,7 @@ fn handles_nested_casts() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -176,7 +176,7 @@ fn cast_in_between() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2, batch3], props);
@@ -204,7 +204,7 @@ fn cast_in_in_list() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -229,7 +229,7 @@ fn cast_in_like() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);
@@ -293,7 +293,7 @@ fn both_column_and_literal_cast() {
 
     let props = WriterProperties::builder()
         .set_statistics_enabled(EnabledStatistics::Chunk)
-        .set_max_row_group_size(2)
+        .set_max_row_group_row_count(Some(2))
         .build();
 
     let bytes = write_parquet(&[batch1, batch2], props);

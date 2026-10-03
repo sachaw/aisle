@@ -109,7 +109,7 @@ fn row_group_prunes_time32_units() {
 
         let props = WriterProperties::builder()
             .set_statistics_enabled(EnabledStatistics::Chunk)
-            .set_max_row_group_size(3)
+            .set_max_row_group_row_count(Some(3))
             .build();
 
         let bytes = write_parquet(&[batch1, batch2], props);
@@ -136,7 +136,7 @@ fn row_group_prunes_time64_units() {
 
         let props = WriterProperties::builder()
             .set_statistics_enabled(EnabledStatistics::Chunk)
-            .set_max_row_group_size(3)
+            .set_max_row_group_row_count(Some(3))
             .build();
 
         let bytes = write_parquet(&[batch1, batch2], props);
@@ -168,7 +168,7 @@ fn row_group_prunes_duration_units() {
 
         let props = WriterProperties::builder()
             .set_statistics_enabled(EnabledStatistics::Chunk)
-            .set_max_row_group_size(3)
+            .set_max_row_group_row_count(Some(3))
             .build();
 
         let bytes = write_parquet(&[batch1, batch2], props);
